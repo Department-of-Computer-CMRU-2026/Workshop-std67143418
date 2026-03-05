@@ -26,23 +26,14 @@
                 <h1 class="text-4xl font-black text-slate-900 tracking-tight">แก้ไขกิจกรรม</h1>
                 <p class="text-slate-400 font-semibold text-sm">กำลังอัปเดต: {{ $workshop->title }}</p>
             </div>
-            <div class="flex items-center gap-3">
-                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="button" onclick="confirmLogout()" class="p-4 text-rose-500 bg-white border border-rose-100 hover:bg-rose-50 rounded-2xl transition-all shadow-sm group" title="ออกจากระบบ">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    </button>
-                </form>
-                <div class="w-16 h-16 bg-amber-500 rounded-3xl flex items-center justify-center text-white shadow-xl shadow-amber-100">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                </div>
+            <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-[2rem] flex items-center justify-center">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
             </div>
         </div>
 
-        <!-- Form Card -->
-        <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-            <div class="p-8 md:p-12">
-                <form action="{{ route('workshops.update', $workshop) }}" method="POST" class="space-y-8">
+        <div class="bg-white rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+            <div class="p-10 md:p-16">
+                <form id="edit-workshop-form" action="{{ route('workshops.update', $workshop) }}" method="POST" class="space-y-10">
                     @csrf
                     @method('PUT')
                     
@@ -112,18 +103,41 @@
                     </div>
 
                     <!-- Actions -->
-                    <div class="pt-6 border-t border-slate-50 flex flex-col md:flex-row gap-4">
-                        <button type="submit" class="flex-grow py-5 bg-amber-500 hover:bg-amber-600 text-white font-black rounded-[1.5rem] transition-all shadow-xl shadow-amber-100 hover:shadow-amber-200 transform hover:-translate-y-1">
-                            บันทึกการเปลี่ยนแปลง
+                    <div class="mt-8 pt-10 pb-4 border-t border-slate-100 flex flex-col md:flex-row gap-4">
+                        <button type="button" onclick="confirmSave()" class="flex-grow py-6 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-[2rem] transition-all shadow-xl shadow-indigo-100 hover:shadow-indigo-200 transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            บันทึกการเปลี่ยนแปลงทั้งหมด
                         </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <p class="mt-8 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">Workshop Management System v2.0</p>
+        <p class="mt-10 text-center text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">Workshop Management System v2.0</p>
     </div>
     <script>
+        function confirmSave() {
+            Swal.fire({
+                title: 'ยืนยันการบันทึกข้อมูล?',
+                text: "คุณต้องการอัปเดตข้อมูลกิจกรรมนี้ใช่หรือไม่?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#4f46e5',
+                cancelButtonColor: '#94a3b8',
+                confirmButtonText: 'บันทึกข้อมูล',
+                cancelButtonText: 'ย้อนกลับ',
+                customClass: {
+                    popup: 'rounded-[3rem] border-none shadow-2xl',
+                    confirmButton: 'rounded-2xl px-8 py-4 font-bold',
+                    cancelButton: 'rounded-2xl px-8 py-4 font-bold'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('edit-workshop-form').submit();
+                }
+            })
+        }
+
         function confirmLogout() {
             Swal.fire({
                 title: 'ยืนยันการออกจากระบบ?',
@@ -131,13 +145,13 @@
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#4f46e5',
-                cancelButtonColor: '#94a3b8',
+                cancelButtonColor: '#f43f5e',
                 confirmButtonText: 'ยืนยัน',
                 cancelButtonText: 'ยกเลิก',
                 customClass: {
-                    popup: 'rounded-[2rem] border-none shadow-2xl',
-                    confirmButton: 'rounded-xl px-6 py-3 font-bold',
-                    cancelButton: 'rounded-xl px-6 py-3 font-bold'
+                    popup: 'rounded-[3rem] border-none shadow-2xl',
+                    confirmButton: 'rounded-2xl px-8 py-4 font-bold',
+                    cancelButton: 'rounded-2xl px-8 py-4 font-bold'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {

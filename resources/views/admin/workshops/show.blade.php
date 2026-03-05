@@ -36,18 +36,10 @@
                 </div>
             </div>
             
-            <div class="flex items-center gap-3">
                 <a href="{{ route('workshops.export', $workshop) }}" class="flex items-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-xl shadow-emerald-100">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     ส่งออก CSV
                 </a>
-                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="button" onclick="confirmLogout()" class="p-4 text-rose-500 bg-white border border-rose-100 hover:bg-rose-50 rounded-2xl transition-all shadow-sm group" title="ออกจากระบบ">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    </button>
-                </form>
-            </div>
         </div>
 
         @if(session('success'))
