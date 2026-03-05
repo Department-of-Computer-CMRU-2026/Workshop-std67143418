@@ -31,13 +31,16 @@ Route::get('admin/login', [AdminAuthController::class , 'showLogin'])->name('adm
 Route::post('admin/login', [AdminAuthController::class , 'login'])->name('admin.login.post');
 Route::post('admin/logout', [AdminAuthController::class , 'logout'])->name('admin.logout');
 
+// Admin Only Routes
 Route::middleware([\App\Http\Middleware\AdminAuth::class])->group(function () {
     Route::resource('admin/workshops', WorkshopController::class);
     Route::get('admin/workshops/{workshop}/export', [WorkshopController::class , 'exportCsv'])->name('workshops.export');
-    Route::delete('admin/registrations/{registration}', [RegistrationController::class , 'destroy'])->name('registrations.destroy');
 });
 
+// Student & General Auth Routes
 Route::middleware('auth')->group(function () {
+    Route::get('my-workshops', [RegistrationController::class , 'index'])->name('workshops.my');
+    Route::delete('registrations/{registration}', [RegistrationController::class , 'destroy'])->name('registrations.destroy');
     Route::get('workshops/{workshop}/register', [RegistrationController::class , 'create'])->name('workshops.register');
     Route::post('workshops/{workshop}/register', [RegistrationController::class , 'store'])->name('workshops.register.store');
 });

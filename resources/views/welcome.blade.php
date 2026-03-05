@@ -29,10 +29,11 @@
     <nav class="hero-bg sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="/" class="text-2xl font-black text-white italic tracking-tight hover:text-indigo-300 transition-colors">Senior-to-Junior</a>
-            <div class="flex items-center space-x-4 text-sm font-semibold">
+            <div class="flex items-center gap-6">
                 @auth
-                    <span class="text-white/60 mr-2 text-xs uppercase tracking-widest">สวัสดี, {{ Auth::user()->name }}</span>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="inline">
+                    <span class="text-white/80 text-[10px] font-black uppercase tracking-widest">สวัสดี, {{ Auth::user()->name }}</span>
+                    <a href="{{ route('workshops.my') }}" class="text-white hover:text-indigo-300 transition-colors font-bold text-xs uppercase tracking-widest">กิจกรรมของฉัน</a>
+                    <form action="{{ route('logout') }}" method="POST" id="logout-form" class="inline">
                         @csrf
                         <button type="button" onclick="confirmLogout(event)" class="px-5 py-2 text-white/70 hover:text-white transition-colors font-bold text-xs uppercase tracking-widest">ออกจากระบบ</button>
                     </form>
@@ -47,12 +48,12 @@
     <!-- Hero Section -->
     <div class="hero-bg py-20 px-6">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="text-white/60 font-black text-[10px] uppercase tracking-[0.4em] mb-6">Senior-to-Junior Workshop Platform</p>
+            <p class="text-white font-black text-[10px] uppercase tracking-[0.4em] mb-6">Senior-to-Junior Workshop Platform</p>
             <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
                 เรียนรู้นอกห้องเรียน<br>
                 <span class="text-indigo-300">ผ่านเวิร์กชอปเฉพาะกิจ</span>
             </h1>
-            <p class="text-white/80 text-base leading-relaxed max-w-2xl mx-auto">
+            <p class="text-white text-base leading-relaxed max-w-2xl mx-auto">
                 ออกแบบมาเพื่อคุณโดยเฉพาะ จำกัดที่นั่งเพื่อให้ดูแลได้อย่างทั่วถึง
             </p>
 
@@ -63,7 +64,10 @@
                     </div>
                     <div class="text-left">
                         <p class="text-white/50 text-[10px] font-bold uppercase tracking-wider">สถานะการลงทะเบียนของคุณ</p>
-                        <p class="font-black text-lg text-white">ลงทะเบียนแล้ว {{ count($userRegistrations) }} / 3 กิจกรรม</p>
+                        <div class="flex items-center gap-4">
+                            <p class="font-black text-lg text-white whitespace-nowrap">ลงทะเบียนแล้ว {{ count($userRegistrations) }} / 3 กิจกรรม</p>
+                            <a href="{{ route('workshops.my') }}" class="text-[10px] font-black uppercase tracking-widest text-indigo-300 hover:text-white transition-all underline decoration-indigo-500/30 underline-offset-4">ดูรายละเอียด</a>
+                        </div>
                     </div>
                     @if(count($userRegistrations) >= 3)
                         <span class="px-4 py-1.5 bg-rose-500/20 text-rose-300 text-[10px] font-black rounded-full uppercase tracking-widest border border-rose-500/30">เต็มโควตาแล้ว</span>

@@ -10,8 +10,20 @@ use App\Models\Registration;
 
 class RegistrationController extends Controller
 {
+    public function index()
+    {
+        $user = Auth::user();
+        $registrations = $user->registrations()->with('workshop')->latest()->get();
+        return view('workshops.my-workshops', compact('registrations'));
+    }
+
     public function destroy(Registration $registration)
     {
+        // 🟢 Security Check: Alllow if Admin or if it's the User's own registration
+        if (!session('admin_id') && Auth::id() !== $registration->user_id) {
+            return redirect()->back()->with('error', 'คุณไม่มีสิทธิ์ในการดำเนินการนี้');
+        }
+
         $registration->delete();
         return redirect()->back()->with('success', 'ยกเลิกการลงทะเบียนเรียบร้อยแล้ว');
     }
