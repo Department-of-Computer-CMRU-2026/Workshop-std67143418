@@ -13,11 +13,12 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::updateOrCreate(
-        ['email' => 'admin'],
+        ['email' => 'pueng9342@gmail.com'],
         [
             'name' => 'Admin User',
             'student_id' => 'ADMIN',
             'password' => \Illuminate\Support\Facades\Hash::make('123'),
+            'role' => 'admin',
         ]
         );
     }
