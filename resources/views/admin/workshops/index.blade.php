@@ -71,7 +71,7 @@
                     หน้าสำหรับนักศึกษา
                 </a>
 
-                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="w-full">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="w-full">
                     @csrf
                     <button type="button" onclick="confirmLogout()" class="w-full px-4 py-3 text-rose-500 hover:bg-rose-50 rounded-xl text-sm font-black transition-all flex items-center gap-2 group">
                         <div class="w-8 h-8 bg-rose-50 rounded-lg flex items-center justify-center group-hover:bg-rose-100 transition-colors">

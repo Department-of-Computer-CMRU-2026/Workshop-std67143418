@@ -26,11 +26,6 @@ Route::get('/register', [AuthController::class , 'showRegister'])->name('registe
 Route::post('/register', [AuthController::class , 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
 
-// Admin Auth
-Route::get('admin/login', [AdminAuthController::class , 'showLogin'])->name('admin.login');
-Route::post('admin/login', [AdminAuthController::class , 'login'])->name('admin.login.post');
-Route::post('admin/logout', [AdminAuthController::class , 'logout'])->name('admin.logout');
-
 // Admin Only Routes
 Route::middleware([\App\Http\Middleware\AdminAuth::class])->group(function () {
     Route::resource('admin/workshops', WorkshopController::class);

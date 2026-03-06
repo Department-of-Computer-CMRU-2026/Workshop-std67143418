@@ -15,8 +15,8 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->session()->has('admin_logged_in')) {
-            return redirect()->route('admin.login')->with('error', 'กรุณาเข้าสู่ระบบแอดมินก่อนดำเนินการ');
+        if (!\Illuminate\Support\Facades\Auth::check() || \Illuminate\Support\Facades\Auth::user()->role !== 'admin') {
+            return redirect()->route('login')->with('error', 'กรุณาเข้าสู่ระบบด้วยบัญชีแอดมินก่อนดำเนินการ');
         }
 
         return $next($request);
