@@ -38,6 +38,7 @@
                         <button type="button" onclick="confirmLogout(event)" class="px-5 py-2 text-white/70 hover:text-white transition-colors font-bold text-xs uppercase tracking-widest">ออกจากระบบ</button>
                     </form>
                 @else
+                    <a href="{{ route('admin.login') }}" class="text-white hover:text-indigo-300 transition-colors font-bold text-xs uppercase tracking-widest">เข้าสู่ระบบแอดมิน</a>
                     <a href="{{ route('login') }}" class="text-white hover:text-indigo-300 transition-colors font-bold text-xs uppercase tracking-widest">เข้าสู่ระบบ</a>
                     <a href="{{ route('register') }}" class="px-6 py-2.5 bg-indigo-500 hover:bg-indigo-400 text-white rounded-full transition-all shadow-lg shadow-indigo-900/50 font-black text-xs uppercase tracking-widest">สมัครสมาชิก</a>
                 @endauth
@@ -179,7 +180,6 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="font-black text-slate-900 italic text-lg">Senior-to-Junior</p>
             <p class="text-xs">© 2026 Senior-to-Junior Workshop. สงวนลิขสิทธิ์ทั้งหมด</p>
-            <a href="{{ route('workshops.index') }}" class="hover:text-indigo-600 transition-colors font-medium text-xs">เข้าสู่ระบบแอดมิน →</a>
         </div>
     </footer>
 

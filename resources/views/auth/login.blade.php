@@ -25,7 +25,7 @@
     </div>
 
     <!-- Main Card -->
-    <div class="w-full max-w-[440px] bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] p-10 md:p-12 shadow-2xl">
+    <div class="w-full max-w-[50%] bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] p-10 md:p-12 shadow-2xl">
 
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-14 h-14 bg-white/10 border border-white/20 rounded-2xl text-white mb-4">
@@ -67,7 +67,7 @@
                 </label>
             </div>
 
-            <div class="pt-3">
+            <div style="margin-top: 1cm;">
                 <button type="submit" class="w-full py-5 bg-indigo-500 hover:bg-indigo-400 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-900/50 active:scale-[0.98] uppercase tracking-widest">
                     ยืนยันการเข้าสู่ระบบ
                 </button>
